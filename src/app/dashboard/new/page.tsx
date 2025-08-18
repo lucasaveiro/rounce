@@ -13,7 +13,7 @@ export default function NewPlan() {
   return (
     <div className="max-w-lg">
       <h2 className="text-xl font-semibold mb-2">Create a new plan</h2>
-      <input value={title} onChange={e=>setTitle(e.target.value)} className="border w-full px-3 py-2 rounded mb-3" />
+      <input value={title} onChange={e=>setTitle(e.target.value)} className="border w-full px-3 py-2 rounded mb-3 text-gray-900" />
       <button onClick={create} className="px-3 py-1.5 rounded bg-black text-white text-sm">Create</button>
     </div>
   );

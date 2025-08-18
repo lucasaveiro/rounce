@@ -15,7 +15,7 @@ export default async function Dashboard() {
       </div>
       <ul className="space-y-2">
         {plans?.map((p) => (
-          <li key={p.id} className="border rounded p-3 bg-white">
+          <li key={p.id} className="border rounded p-3 bg-white text-gray-900">
             <div className="flex items-center justify-between">
               <div>
                 <div className="font-medium">{p.title}</div>
