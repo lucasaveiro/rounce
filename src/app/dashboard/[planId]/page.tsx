@@ -8,9 +8,9 @@ export const dynamic = 'force-dynamic';
 export default async function PlanPage({
   params,
 }: {
-  params: Promise<{ planId: string }>;
+  params: { planId: string };
 }) {
-  const { planId } = await params;
+  const { planId } = params;
   const supabase = supabaseServer();
 
   try {
@@ -50,6 +50,7 @@ export default async function PlanPage({
           onSave={async (md) => {
             await fetch('/api/plan', {
               method: 'PUT',
+              headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ id: planId, content_md: md }),
             });
           }}
