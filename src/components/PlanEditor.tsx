@@ -3,7 +3,9 @@ import { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
-export default function PlanEditor({ plan, onSave }: { plan: any; onSave: (md: string) => Promise<void>; }) {
+type Plan = { content_md?: string } | null;
+
+export default function PlanEditor({ plan, onSave }: { plan: Plan; onSave: (md: string) => Promise<void>; }) {
   const [md, setMd] = useState(plan?.content_md || '');
   const [section, setSection] = useState('Executive Summary');
   const [input, setInput] = useState('');
