@@ -9,8 +9,8 @@ export async function POST(req: NextRequest) {
   } = await supabase.auth.getUser();
   if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
-  const priceId = process.env.NEXT_PUBLIC_STRIPE_PRICE_PRO!;
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL!;
+  const priceId = process.env['NEXT_PUBLIC_STRIPE_PRICE_PRO']!;
+  const baseUrl = process.env['NEXT_PUBLIC_APP_URL']!;
 
   // Ensure profile has stripe_customer_id
   const { data: profile } = await supabase
