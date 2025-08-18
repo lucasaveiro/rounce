@@ -13,7 +13,11 @@ export default function PlanEditor({ plan, onSave }: { plan: Plan; onSave: (md: 
 
   const generate = async () => {
     setLoading(true);
-    const res = await fetch('/api/generate', { method: 'POST', body: JSON.stringify({ section, input }) });
+    const res = await fetch('/api/generate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ section, input }),
+    });
     const data = await res.json();
     setMd(prev => prev + `\n\n` + (data.draft || ''));
     setLoading(false);

@@ -6,7 +6,11 @@ export default function NewPlan() {
   const [title, setTitle] = useState('My Business Plan');
   const router = useRouter();
   const create = async () => {
-    const res = await fetch('/api/plan', { method: 'POST', body: JSON.stringify({ title }) });
+    const res = await fetch('/api/plan', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title }),
+    });
     const data = await res.json();
     if (data.plan?.id) router.push(`/dashboard/${data.plan.id}`);
   };
