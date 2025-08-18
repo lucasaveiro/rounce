@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
   const { section, input, tone = 'concise' } = await req.json();
-  const key = process.env.OPENAI_API_KEY;
+  const key = process.env['OPENAI_API_KEY'];
   if (!key) {
     // Fallback stub for early MVP when no key is set
     const stub = `## ${section}\n${input ? `Input: ${input}\n` : ''}Draft: (stub) Write 2-3 concise paragraphs addressing this section.`;
@@ -26,3 +26,4 @@ export async function POST(req: NextRequest) {
   const draft = data.choices?.[0]?.message?.content || '';
   return NextResponse.json({ draft });
 }
+

@@ -8,15 +8,19 @@ export async function POST(req: NextRequest) {
   const sig = req.headers.get('stripe-signature') as string;
   let event: Stripe.Event;
   try {
-    event = stripe.webhooks.constructEvent(body, sig, process.env.STRIPE_WEBHOOK_SECRET!);
+    event = stripe.webhooks.constructEvent(
+      body,
+      sig,
+      process.env['STRIPE_WEBHOOK_SECRET']!
+    );
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
     return new NextResponse(`Webhook Error: ${message}`, { status: 400 });
   }
 
   const supabaseAdmin = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
+    process.env['NEXT_PUBLIC_SUPABASE_URL']!,
+    process.env['SUPABASE_SERVICE_ROLE_KEY']!
   );
 
   switch (event.type) {
