@@ -5,7 +5,12 @@ export default async function Dashboard() {
   const supabase = supabaseServer();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return <div>Please sign in.</div>;
-  const { data: plans } = await supabase.from('plans').select('*').eq('user_id', user.id).eq('is_deleted', false).order('created_at', { ascending: false });
+  const { data: plans } = await supabase
+    .from('plans')
+    .select('*')
+    .eq('user_id', user.id)
+    .eq('is_deleted', false)
+    .order('created_at', { ascending: false });
 
   return (
     <div>
