@@ -20,7 +20,12 @@ export default function AuthGate({ children }: { children: React.ReactNode }) {
     return (
       <div className="max-w-md mx-auto p-6">
         <h1 className="text-2xl font-semibold mb-4">Sign in to Rounce</h1>
-        <Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} providers={['google']} />
+        <Auth
+          supabaseClient={supabase}
+          appearance={{ theme: ThemeSupa }}
+          providers={['google']}
+          redirectTo={typeof window === 'undefined' ? undefined : `${window.location.origin}/auth/callback`}
+        />
       </div>
     );
   }
