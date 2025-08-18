@@ -11,8 +11,11 @@ export default function SubscribeButton() {
     setLoading(false);
   };
   return (
-    <button onClick={onClick} disabled={loading}
-      className="px-3 py-1.5 rounded bg-black text-white text-sm disabled:opacity-50">
+    <button
+      onClick={onClick}
+      disabled={loading}
+      className="px-3 py-1.5 rounded bg-white text-gray-900 text-sm hover:bg-gray-100 disabled:opacity-50"
+    >
       {loading ? 'Redirecting…' : 'Go Pro'}
     </button>
   );
