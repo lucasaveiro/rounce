@@ -8,9 +8,9 @@ export const dynamic = 'force-dynamic';
 export default async function PlanPage({
   params,
 }: {
-  params: { planId: string };
+  params: Promise<{ planId: string }>;
 }) {
-  const { planId } = params;
+  const { planId } = await params;
   const supabase = supabaseServer();
 
   try {
