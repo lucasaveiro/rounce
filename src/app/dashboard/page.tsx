@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { supabaseServer } from '@/lib/supabaseServer';
+import PlanListItem from '@/components/PlanListItem';
 
 export default async function Dashboard() {
   const supabase = supabaseServer();
@@ -20,15 +21,7 @@ export default async function Dashboard() {
       </div>
       <ul className="space-y-2">
         {plans?.map((p) => (
-          <li key={p.id} className="border rounded p-3 bg-white text-gray-900">
-            <div className="flex items-center justify-between">
-              <div>
-                <div className="font-medium">{p.title}</div>
-                <div className="text-xs text-gray-500">{new Date(p.updated_at).toLocaleString()}</div>
-              </div>
-              <Link href={`/dashboard/${p.id}`} className="text-sm underline">Open</Link>
-            </div>
-          </li>
+          <PlanListItem key={p.id} plan={p} />
         ))}
       </ul>
     </div>
