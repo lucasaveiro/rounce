@@ -26,3 +26,17 @@ export async function PUT(req: NextRequest) {
   if (error) return NextResponse.json({ error: error.message }, { status: 400 });
   return NextResponse.json({ plan: data });
 }
+
+export async function DELETE(req: NextRequest) {
+  const supabase = supabaseRoute();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  const { id } = await req.json();
+  const { error } = await supabase
+    .from('plans')
+    .update({ is_deleted: true })
+    .eq('id', id)
+    .eq('user_id', user.id);
+  if (error) return NextResponse.json({ error: error.message }, { status: 400 });
+  return NextResponse.json({ success: true });
+}
